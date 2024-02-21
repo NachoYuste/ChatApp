@@ -27,13 +27,13 @@ export class MyGateway implements OnModuleInit {
     @SubscribeMessage(GatewayEvents.ReceiveMessage)
     onNewMessage(@MessageBody() body: Message) {
         console.log(body);
-        this.server.to(body.room).emit(GatewayEvents.EmitMessage, {
+        this.server.to(body.room).emit(GatewayEvents.ReceiveMessage, {
             msg: body.message
         })
     }
 
     @SubscribeMessage(GatewayEvents.JoinRoom)
-    onJoinRoom(@MessageBody() room: any, @ConnectedSocket() socket: Socket) {
+    onJoinRoom(@MessageBody() room: string, @ConnectedSocket() socket: Socket) {
         console.log(socket.id + " joining room: " + room);
         socket.join(room);
     }
