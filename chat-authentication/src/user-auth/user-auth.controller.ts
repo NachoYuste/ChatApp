@@ -13,7 +13,7 @@ export class UserAuthController {
     @Post('register')
     async register(@Body() user: RegisterUserDto): Promise<{ message: string }> {
         try {
-            return await this.userAuthService.register(user.username, user.email, user.password);
+            return await this.userAuthService.register(user);
         }
         catch (err) {
             throw new Error('An error occurred while registering the user');
